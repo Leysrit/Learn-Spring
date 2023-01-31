@@ -1,8 +1,10 @@
 package hattasugiarto.spring.core;
 
 import hattasugiarto.spring.core.repository.CategoryRepository;
+import hattasugiarto.spring.core.repository.CustomerRepository;
 import hattasugiarto.spring.core.repository.ProductRepository;
 import hattasugiarto.spring.core.service.CategoryService;
+import hattasugiarto.spring.core.service.CustomerService;
 import hattasugiarto.spring.core.service.ProductService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,5 +43,17 @@ public class ComponentTest {
         CategoryRepository categoryRepository = applicationContext.getBean(CategoryRepository.class);
 
         Assertions.assertSame(categoryRepository, categoryService.getCategoryRepository());
+    }
+
+    @Test
+    void testFieldDependencyInjection() {
+
+        CustomerService customerService = applicationContext.getBean(CustomerService.class);
+
+        CustomerRepository normalCustomerRepository = applicationContext.getBean("normalCustomerRepository",CustomerRepository.class);
+        CustomerRepository premiumCustomerRepository = applicationContext.getBean("premiumCustomerRepository",CustomerRepository.class);
+
+        Assertions.assertSame(normalCustomerRepository, customerService.getNormalCustomerRepository());
+        Assertions.assertSame(premiumCustomerRepository, customerService.getPremiumCustomerRepository());
     }
 }
