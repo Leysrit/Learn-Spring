@@ -1,5 +1,6 @@
 package hattasugiarto.spring.core;
 
+import hattasugiarto.spring.core.data.MultiFoo;
 import hattasugiarto.spring.core.repository.CategoryRepository;
 import hattasugiarto.spring.core.repository.CustomerRepository;
 import hattasugiarto.spring.core.repository.ProductRepository;
@@ -55,5 +56,12 @@ public class ComponentTest {
 
         Assertions.assertSame(normalCustomerRepository, customerService.getNormalCustomerRepository());
         Assertions.assertSame(premiumCustomerRepository, customerService.getPremiumCustomerRepository());
+    }
+
+    @Test
+    void testObjectProvider() {
+
+        MultiFoo multiFoo = applicationContext.getBean(MultiFoo.class);
+        Assertions.assertEquals(3, multiFoo.getFoos().size());
     }
 }
