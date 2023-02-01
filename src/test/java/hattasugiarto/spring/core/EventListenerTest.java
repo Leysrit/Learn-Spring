@@ -1,6 +1,7 @@
 package hattasugiarto.spring.core;
 
 import hattasugiarto.spring.core.listener.LoginSuccessListener;
+import hattasugiarto.spring.core.listener.UserListener;
 import hattasugiarto.spring.core.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,8 @@ public class EventListenerTest {
     @Configuration
     @Import({
             UserService.class,
-            LoginSuccessListener.class
+            LoginSuccessListener.class,
+            UserListener.class
     })
     public static class TestConfiguration {
 
